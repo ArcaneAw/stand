@@ -1100,23 +1100,9 @@ Posing1 = false
 Posing2 = false
 Posing3 = false
 --/---------------------------------------------------------------------------------------------\--/ vArcane
-local function Moved()
-    pcall(function()
-      if OWNER.Character.Humanoid.MoveDirection.magnitude > 0 and Barrage == false then
-          if not Glide2 then return end
-              if Glide2.IsPlaying == true then
-                  return 
-              end
-              Glide2:Play(0.3)
-          else
-              wait(0.2)
-              Glide2:Stop(0.28)
-          end     
-      end)
-  end
-  OWNER.Character.Humanoid:GetPropertyChangedSignal("MoveDirection"):Connect(Moved)
+
 --//-----------------------------------------------------------------------------------------\\-- Poses :
-  local function pose1()
+  function pose1()
       if Posing1 == true then
           RS:UnbindFromRenderStep("POSING")
           Posing1 = false
@@ -1137,7 +1123,7 @@ local function Moved()
       end
   end
 --//------------------------------------------------------------------------------------------\\--
-  local function pose2()
+  function pose2()
       if Posing2 == true then
           RS:UnbindFromRenderStep("POSING")
           Posing2 = false
@@ -1158,7 +1144,7 @@ local function Moved()
       end
   end
 --//------------------------------------------------------------------------------------------\\--
-  local function pose3()
+  function pose3()
       if Posing3 == true then
           RS:UnbindFromRenderStep("POSING")
           Posing3 = false
@@ -1178,18 +1164,8 @@ local function Moved()
           end)
       end
   end
---//------------------------------------------------------------------------------------------\\-- Ability Functions :
-  local function Summon()
-      Summoned = true
-    Stand.Action = "Summoned"
-  end
 --//------------------------------------------------------------------------------------------\\--
-  local function Desummon()
-      Summoned = false
-    Stand.Action = "Desummoned"
-  end
---//------------------------------------------------------------------------------------------\\--
-  local function Ora()
+  function Ora()
       Barrage = true
       RS:UnbindFromRenderStep("Summon")
       STAND.Character.HumanoidRootPart:FindFirstChildWhichIsA("BodyPosition"):Destroy()
@@ -1232,12 +1208,12 @@ local function Moved()
               AnimStop(4600078411)
               AnimPlay(3541114300)
               STAND.Character.HumanoidRootPart:FindFirstChild("BodyPosition"):Destroy()
-              Summon()
+              Stand.Action = "Summoned"
           end
       end)
   end
 --//------------------------------------------------------------------------------------------\\--
-  local function Heavy()    
+  function Heavy()    
       if side == true then
           a = false
           STAND.Character.HumanoidRootPart.CFrame = OWNER.Character.HumanoidRootPart.CFrame*CFrame.new(0,-100,0)
@@ -1299,7 +1275,7 @@ local function Moved()
       end
   end
 --//------------------------------------------------------------------------------------------\\--
-  local function Heavy1()
+  function Heavy1()
       STAND.Character.HumanoidRootPart.CFrame = OWNER.Character.HumanoidRootPart.CFrame*CFrame.new(0,-100,0)
       Hit(true)
       wait(0.975)
@@ -1323,7 +1299,7 @@ local function Moved()
       BP.Position = OWNER.Character.HumanoidRootPart.CFrame*CFrame.new(0.25,0.75,-4).Position
       wait(0.25)
       STAND.Character.HumanoidRootPart:FindFirstChildWhichIsA("BodyPosition"):Destroy()
-      Summon()
+      Stand.Action = "Summoned"
       AnimStop(3354696735,0.3)
   end
   --/---------------------------------------------------------------------------------------------\--
