@@ -1,4 +1,4 @@
---// Stand Creator 1.1.0 \\--
+--// Private new \\--
 if not game['Loaded'] or not game:GetService("Players").LocalPlayer then 
     game['Loaded']:Wait();
     game:WaitForChild(game:GetService('Players'));
@@ -1179,54 +1179,14 @@ local function Moved()
       end
   end
 --//------------------------------------------------------------------------------------------\\-- Ability Functions :
-  local function Summon() -- OKAY SO BASICALLY  THIS IS LIKE THE THING THAT MAKES THE STAND ( GHOST ) FOLLOW ME
+  local function Summon()
       Summoned = true
-      local BP = Instance.new("BodyPosition")
-      BP.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
-      BP.P = 2500
-      BP.D = 300
-      BP.Parent = STAND.Character.HumanoidRootPart
-      BP.Position = STAND.Character.HumanoidRootPart.Position
-          RS:BindToRenderStep("Summon", -1 , function()
-              BP.Position = OWNER.Character.HumanoidRootPart.CFrame*CFrame.new(1,1.85,2.5).Position
-              local mag = (STAND.Character.HumanoidRootPart.Position - OWNER.Character.HumanoidRootPart.Position).magnitude
-              if mag > 40 then
-                  STAND.Character.HumanoidRootPart.CFrame = OWNER.Character.HumanoidRootPart.CFrame*CFrame.new(1,1.85,2.5)
-              end
-          end)
-      wait(0.5)
-      BP.D = 252
+    Stand.Action = "Summoned"
   end
 --//------------------------------------------------------------------------------------------\\--
   local function Desummon()
       Summoned = false
-      RS:UnbindFromRenderStep("Summon")
-      STAND.Character.HumanoidRootPart:FindFirstChildWhichIsA("BodyPosition"):Destroy()
-      local BP = Instance.new("BodyPosition")
-      BP.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
-      BP.P = 2500
-      BP.D = 300
-      BP.Parent = STAND.Character.HumanoidRootPart
-      coroutine.wrap(function()
-          if (STAND.Character.HumanoidRootPart.Position - OWNER.Character.HumanoidRootPart.Position).Magnitude < 3.3 then
-              BP.Position = OWNER.Character.HumanoidRootPart.CFrame*CFrame.new(-0.3,-1,1.6).Position
-              repeat game["RunService"].Stepped:Wait() until (STAND.Character.HumanoidRootPart.Position - OWNER.Character.HumanoidRootPart.Position).Magnitude < 1.82 or not STAND.Character.HumanoidRootPart:FindFirstChildWhichIsA("BodyPosition") or (STAND.Character.HumanoidRootPart.Position - OWNER.Character.HumanoidRootPart.Position).Magnitude > 3.3
-              if STAND.Character.HumanoidRootPart:FindFirstChildWhichIsA("BodyPosition") then
-                  STAND.Character.HumanoidRootPart:FindFirstChildWhichIsA("BodyPosition"):Destroy()
-              end
-              STAND.Character.HumanoidRootPart.CFrame = OWNER.Character.HumanoidRootPart.CFrame*CFrame.new(0,0,100)
-              STAND.Character.HumanoidRootPart.CFrame = OWNER.Character.HumanoidRootPart.CFrame*CFrame.new(0,-100,0)
-          else
-              BP.Position = OWNER.Character.HumanoidRootPart.CFrame*CFrame.new(-0,-1.5,0).Position
-              wait(0.225)
-              if STAND.Character.HumanoidRootPart:FindFirstChildWhichIsA("BodyPosition") then
-                  STAND.Character.HumanoidRootPart:FindFirstChildWhichIsA("BodyPosition"):Destroy()
-              end
-              STAND.Character.HumanoidRootPart.CFrame = OWNER.Character.HumanoidRootPart.CFrame*CFrame.new(0,0,100)
-              STAND.Character.HumanoidRootPart.CFrame = OWNER.Character.HumanoidRootPart.CFrame*CFrame.new(0,-100,0)
-          end
-          print"debug: desummon"
-      end)()
+    Stand.Action = "Desummoned"
   end
 --//------------------------------------------------------------------------------------------\\--
   local function Ora()
