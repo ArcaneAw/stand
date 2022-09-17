@@ -988,27 +988,6 @@ Buy = {
     end,
 }
 --//------------------------------------------------------------------------------------------\\--
-    if Settings['Made By JoJo#2494'].DASH then
-local Char = game.Players.LocalPlayer.Character local Hum = Char:FindFirstChildOfClass("Humanoid") or Char:FindFirstChildOfClass("AnimationController")
-        while true do wait()
-            for i,v in next, Hum:GetPlayingAnimationTracks() do
-                if v.Animation.AnimationId == "rbxassetid://2788289281" then
-                    v:Stop()
-                    for i,v in next, Hum:GetPlayingAnimationTracks() do
-                        if v.Animation.AnimationId == "rbxassetid://2788292075" then
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 0)
-                            wait(0.1)
-                            game:GetService('Players').LocalPlayer.Character:FindFirstChild('HumanoidRootPart').Anchored = true;
-                            wait(1.5)
-                            game:GetService('Players').LocalPlayer.Character:FindFirstChild('HumanoidRootPart').Anchored = false
-                        end
-                    end
-                end
-            end
-        end   
-    end
-
---//------------------------------------------------------------------------------------------\\--
 coroutine.wrap(function()
     while Settings['Made By JoJo#2494'].AUTOPICKUPCASH == true do
         wait()
