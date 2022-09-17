@@ -988,6 +988,27 @@ Buy = {
     end,
 }
 --//------------------------------------------------------------------------------------------\\--
+    if Settings['Arcane#1838'].DASH then
+local Char = game.Players.LocalPlayer.Character local Hum = Char:FindFirstChildOfClass("Humanoid") or Char:FindFirstChildOfClass("AnimationController")
+        while true do wait()
+            for i,v in next, Hum:GetPlayingAnimationTracks() do
+                if v.Animation.AnimationId == "rbxassetid://2788289281" then
+                    v:Stop()
+                    for i,v in next, Hum:GetPlayingAnimationTracks() do
+                        if v.Animation.AnimationId == "rbxassetid://2788292075" then
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 0)
+                            wait(0.1)
+                            game:GetService('Players').LocalPlayer.Character:FindFirstChild('HumanoidRootPart').Anchored = true;
+                            wait(1.5)
+                            game:GetService('Players').LocalPlayer.Character:FindFirstChild('HumanoidRootPart').Anchored = false
+                        end
+                    end
+                end
+            end
+        end   
+    end
+
+--//------------------------------------------------------------------------------------------\\--
 coroutine.wrap(function()
     while Settings['Arcane#1838'].AUTOPICKUPCASH == true do
         wait()
@@ -1003,100 +1024,4 @@ coroutine.wrap(function()
 end)()
 end
 end
---/---------------------------------------------------------------------------------------------\--/ vArcane
-if not game:GetService("Workspace"):FindFirstChild("Gliding") then
-    Glide = Instance.new('Animation', game:GetService("Workspace"))
-    Glide.AnimationId = 'rbxassetid://3084858603'
-    Glide.Name = 'Gliding'
-    Glide2 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(Glide)
-else
-    Glide = game:GetService("Workspace").Gliding
-    Glide2 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(Glide)
-end 
---//------------------------------------------------------------------------------------------\\--
-if not game:GetService("Workspace"):FindFirstChild("barrage1") and not game:GetService("Workspace"):FindFirstChild("barrage2") and not game:GetService("Workspace"):FindFirstChild("barrage3") and not game:GetService("Workspace"):FindFirstChild("barrage4") then
-    local barrage1 = Instance.new('Animation', game:GetService("Workspace"))
-    barrage1.AnimationId = 'rbxassetid://8254787838'
-    barrage1.Name = "barrage1"
-    local barrage2 = Instance.new('Animation', game:GetService("Workspace"))
-    barrage2.AnimationId = 'rbxassetid://8254789608'
-    barrage2.Name = "barrage2"
-    local barrage3 = Instance.new('Animation', game:GetService("Workspace"))
-    barrage3.AnimationId = 'rbxassetid://8254792138'
-    barrage3.Name = "barrage3"
-    local barrage4 = Instance.new('Animation', game:GetService("Workspace"))
-    barrage4.AnimationId = 'rbxassetid://8254794168'
-    barrage4.Name = "barrage4"
-    Barraging1 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(barrage1)
-    Barraging2 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(barrage2)
-    Barraging3 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(barrage3)
-    Barraging4 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(barrage4)
-else
-    local barrage1 = game:GetService("Workspace").barrage1
-    local barrage2 = game:GetService("Workspace").barrage2
-    local barrage3 = game:GetService("Workspace").barrage3
-    local barrage4 = game:GetService("Workspace").barrage4
-    Barraging1 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(barrage1)
-    Barraging2 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(barrage2)
-    Barraging3 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(barrage3)
-    Barraging4 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(barrage4)
-end
---//------------------------------------------------------------------------------------------\\-- Poses :
-if not game:GetService("Workspace"):FindFirstChild("TopRock") then
-    TopRock = Instance.new('Animation', game:GetService("Workspace"));
-    TopRock.AnimationId = 'rbxassetid://3361276673';
-    TopRock.Name = 'TopRock';
-    Pose1 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(TopRock);
-    Pose1.Looped = true;
-    Pose1.Priority = Enum.AnimationPriority.Action;
-else
-    TopRock = game:GetService("Workspace"):FindFirstChild("TopRock");
-    Pose1 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(TopRock);
-    Pose1.Looped = true;
-    Pose1.Priority = Enum.AnimationPriority.Action;
-end
---//------------------------------------------------------------------------------------------\\--
-if not game:GetService("Workspace"):FindFirstChild("Beckon") then
-    Beckon = Instance.new('Animation', game:GetService("Workspace"));
-    Beckon.AnimationId = 'rbxassetid://5230598276';
-    Beckon.Name = 'Beckon';
-    Pose2 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(Beckon);
-    Pose2.Looped = true;
-    Pose2.Priority = Enum.AnimationPriority.Action;
-else
-    Beckon = game:GetService("Workspace"):FindFirstChild("Beckon");
-    Pose2 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(Beckon);
-    Pose2.Looped = true;
-    Pose2.Priority = Enum.AnimationPriority.Action;
-end
---//------------------------------------------------------------------------------------------\\--
-if not game:GetService("Workspace"):FindFirstChild("Godlike") then
-    Godlike = Instance.new('Animation', game:GetService("Workspace"));
-    Godlike.AnimationId = 'rbxassetid://3337994105';
-    Godlike.Name = 'Godlike';
-    Pose3 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(Godlike);
-    Pose3.Looped = true;
-    Pose3.Priority = Enum.AnimationPriority.Action;
-else
-    Godlike = game:GetService("Workspace"):FindFirstChild("Godlike");
-    Pose3 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(Godlike);
-    Pose3.Looped = true;
-    Pose3.Priority = Enum.AnimationPriority.Action;
-end
---//------------------------------------------------------------------------------------------\\-- 
-function Looking()
-  RS:UnbindFromRenderStep("Looking")
-    RS:BindToRenderStep("Looking", -1 , function() -- we copy the stand owner rotation
-        local direction = OWNER.Character.HumanoidRootPart.Position + OWNER.Character.HumanoidRootPart.CFrame.LookVector * OWNER.Character.HumanoidRootPart.Position.Magnitude
-        STAND.Character.HumanoidRootPart.CFrame = CFrame.lookAt(STAND.Character.HumanoidRootPart.Position, direction)
-    end)
-end
-Looking()
---//------------------------------------------------------------------------------------------\\-- Variables :
-Summoned = false
-Barrage = false
-Barrage1 = false
-Posing1 = false
-Posing2 = false
-Posing3 = false
 --/---------------------------------------------------------------------------------------------\--/ vArcane
