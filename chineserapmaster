@@ -1003,5 +1003,327 @@ Buy = {
         STAND.Backpack:FindFirstChild("Combat").Parent = STAND.Character
     end,
 }
-
 --/---------------------------------------------------------------------------------------------\--/ vArcane
+if not game:GetService("Workspace"):FindFirstChild("Gliding") then
+    Glide = Instance.new('Animation', game:GetService("Workspace"))
+    Glide.AnimationId = 'rbxassetid://3084858603'
+    Glide.Name = 'Gliding'
+    Glide2 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(Glide)
+else
+    Glide = game:GetService("Workspace").Gliding
+    Glide2 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(Glide)
+end 
+--//------------------------------------------------------------------------------------------\\--
+if not game:GetService("Workspace"):FindFirstChild("barrage1") and not game:GetService("Workspace"):FindFirstChild("barrage2") and not game:GetService("Workspace"):FindFirstChild("barrage3") and not game:GetService("Workspace"):FindFirstChild("barrage4") then
+    local barrage1 = Instance.new('Animation', game:GetService("Workspace"))
+    barrage1.AnimationId = 'rbxassetid://8254787838'
+    barrage1.Name = "barrage1"
+    local barrage2 = Instance.new('Animation', game:GetService("Workspace"))
+    barrage2.AnimationId = 'rbxassetid://8254789608'
+    barrage2.Name = "barrage2"
+    local barrage3 = Instance.new('Animation', game:GetService("Workspace"))
+    barrage3.AnimationId = 'rbxassetid://8254792138'
+    barrage3.Name = "barrage3"
+    local barrage4 = Instance.new('Animation', game:GetService("Workspace"))
+    barrage4.AnimationId = 'rbxassetid://8254794168'
+    barrage4.Name = "barrage4"
+    Barraging1 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(barrage1)
+    Barraging2 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(barrage2)
+    Barraging3 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(barrage3)
+    Barraging4 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(barrage4)
+else
+    local barrage1 = game:GetService("Workspace").barrage1
+    local barrage2 = game:GetService("Workspace").barrage2
+    local barrage3 = game:GetService("Workspace").barrage3
+    local barrage4 = game:GetService("Workspace").barrage4
+    Barraging1 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(barrage1)
+    Barraging2 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(barrage2)
+    Barraging3 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(barrage3)
+    Barraging4 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(barrage4)
+end
+--//------------------------------------------------------------------------------------------\\-- Poses :
+if not game:GetService("Workspace"):FindFirstChild("TopRock") then
+    TopRock = Instance.new('Animation', game:GetService("Workspace"));
+    TopRock.AnimationId = 'rbxassetid://3361276673';
+    TopRock.Name = 'TopRock';
+    Pose1 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(TopRock);
+    Pose1.Looped = true;
+    Pose1.Priority = Enum.AnimationPriority.Action;
+else
+    TopRock = game:GetService("Workspace"):FindFirstChild("TopRock");
+    Pose1 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(TopRock);
+    Pose1.Looped = true;
+    Pose1.Priority = Enum.AnimationPriority.Action;
+end
+--//------------------------------------------------------------------------------------------\\--
+if not game:GetService("Workspace"):FindFirstChild("Beckon") then
+    Beckon = Instance.new('Animation', game:GetService("Workspace"));
+    Beckon.AnimationId = 'rbxassetid://5230598276';
+    Beckon.Name = 'Beckon';
+    Pose2 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(Beckon);
+    Pose2.Looped = true;
+    Pose2.Priority = Enum.AnimationPriority.Action;
+else
+    Beckon = game:GetService("Workspace"):FindFirstChild("Beckon");
+    Pose2 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(Beckon);
+    Pose2.Looped = true;
+    Pose2.Priority = Enum.AnimationPriority.Action;
+end
+--//------------------------------------------------------------------------------------------\\--
+if not game:GetService("Workspace"):FindFirstChild("Godlike") then
+    Godlike = Instance.new('Animation', game:GetService("Workspace"));
+    Godlike.AnimationId = 'rbxassetid://3337994105';
+    Godlike.Name = 'Godlike';
+    Pose3 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(Godlike);
+    Pose3.Looped = true;
+    Pose3.Priority = Enum.AnimationPriority.Action;
+else
+    Godlike = game:GetService("Workspace"):FindFirstChild("Godlike");
+    Pose3 = STAND.Character:FindFirstChildWhichIsA('Humanoid'):LoadAnimation(Godlike);
+    Pose3.Looped = true;
+    Pose3.Priority = Enum.AnimationPriority.Action;
+end
+--//------------------------------------------------------------------------------------------\\-- 
+function Looking()
+  RS:UnbindFromRenderStep("Looking")
+    RS:BindToRenderStep("Looking", -1 , function() -- we copy the stand owner rotation
+        local direction = OWNER.Character.HumanoidRootPart.Position + OWNER.Character.HumanoidRootPart.CFrame.LookVector * OWNER.Character.HumanoidRootPart.Position.Magnitude
+        STAND.Character.HumanoidRootPart.CFrame = CFrame.lookAt(STAND.Character.HumanoidRootPart.Position, direction)
+    end)
+end
+Looking()
+--//------------------------------------------------------------------------------------------\\-- Variables :
+Summoned = false
+Barrage = false
+Barrage1 = false
+Posing1 = false
+Posing2 = false
+Posing3 = false
+--/---------------------------------------------------------------------------------------------\--/ vArcane
+local function Moved()
+    pcall(function()
+      if OWNER.Character.Humanoid.MoveDirection.magnitude > 0 and Barrage == false then
+          if not Glide2 then return end
+              if Glide2.IsPlaying == true then
+                  return 
+              end
+              Glide2:Play(0.3)
+          else
+              wait(0.2)
+              Glide2:Stop(0.28)
+          end     
+      end)
+  end
+  OWNER.Character.Humanoid:GetPropertyChangedSignal("MoveDirection"):Connect(Moved)
+--//-----------------------------------------------------------------------------------------\\-- Poses :
+  local function pose1()
+      if Posing1 == true then
+          RS:UnbindFromRenderStep("POSING")
+          Posing1 = false
+          Pose1:Stop(0.25)
+      else
+          Posing1 = true
+          RS:BindToRenderStep("POSING", -1 , function()
+              pcall(function()
+                  if Posing1 == true then
+                      if not Pose1.IsPlaying then
+                          Pose1:Play();
+                          Pose1:AdjustSpeed(0);
+                          Pose1.TimePosition = 0.42;
+                      end
+                  end
+              end)
+          end)
+      end
+  end
+--//------------------------------------------------------------------------------------------\\--
+  local function pose2()
+      if Posing2 == true then
+          RS:UnbindFromRenderStep("POSING")
+          Posing2 = false
+          Pose2:Stop(0.25)
+      else
+          Posing2 = true
+          RS:BindToRenderStep("POSING", -1 , function()
+              pcall(function()
+                  if Posing2 == true then
+                      if not Pose2.IsPlaying then
+                          Pose2:Play();
+                          Pose2:AdjustSpeed(0);
+                          Pose2.TimePosition = 1.7;
+                      end
+                  end
+              end)
+          end)
+      end
+  end
+--//------------------------------------------------------------------------------------------\\--
+  local function pose3()
+      if Posing3 == true then
+          RS:UnbindFromRenderStep("POSING")
+          Posing3 = false
+          Pose3:Stop(0.25)
+      else
+          Posing3 = true
+          RS:BindToRenderStep("POSING", -1 , function()
+              pcall(function()
+                  if Posing3 == true then
+                      if not Pose3.IsPlaying then
+                          Pose3:Play();
+                          Pose3:AdjustSpeed(0);
+                          Pose3.TimePosition = 0.85;
+                      end
+                  end
+              end)
+          end)
+      end
+  end
+--//------------------------------------------------------------------------------------------\\-- Ability Functions :
+  local function Summon()
+      Summoned = true
+    Stand.Action = "Summoned"
+  end
+--//------------------------------------------------------------------------------------------\\--
+  local function Desummon()
+      Summoned = false
+    Stand.Action = "Desummoned"
+  end
+--//------------------------------------------------------------------------------------------\\--
+  local function Ora()
+      Barrage = true
+      RS:UnbindFromRenderStep("Summon")
+      STAND.Character.HumanoidRootPart:FindFirstChildWhichIsA("BodyPosition"):Destroy()
+      BP = Instance.new("BodyPosition")
+      BP.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+      BP.P = 5000
+      BP.D = 250
+      BP.Parent = STAND.Character.HumanoidRootPart
+      BP.Position = STAND.Character.HumanoidRootPart.Position
+      AnimPlay(4600078411,0)
+      coroutine.wrap(function()
+          while true do
+              Barraging2:Play()
+              Barraging2:Play()
+              Barraging2:AdjustSpeed(8.15)
+              wait(0.018)
+              Barraging1:Play()
+              Barraging1:Play()
+              Barraging1:AdjustSpeed(8.15)
+              wait(0.018)
+              Barraging4:Play()
+              Barraging4:Play()
+              Barraging4:AdjustSpeed(8.15)
+              wait(0.018)
+              Barraging3:Play()
+              Barraging3:Play()
+              Barraging3:AdjustSpeed(8.15)
+              wait(0.018)
+              if Barrage == false then
+                  break 
+              end
+          end
+      end)()
+      RS:BindToRenderStep("Ora", 250 , function()
+          BP.Position = OWNER.Character.HumanoidRootPart.CFrame*CFrame.new(0,0.85,-4.85).Position
+          Hit(false)
+          if STAND.Character.BodyEffects["K.O"].Value == true then
+              Barrage = false
+              RS:UnbindFromRenderStep("Ora")
+              AnimStop(4600078411)
+              AnimPlay(3541114300)
+              STAND.Character.HumanoidRootPart:FindFirstChild("BodyPosition"):Destroy()
+              Summon()
+          end
+      end)
+  end
+--//------------------------------------------------------------------------------------------\\--
+  local function Heavy()    
+      if side == true then
+          a = false
+          STAND.Character.HumanoidRootPart.CFrame = OWNER.Character.HumanoidRootPart.CFrame*CFrame.new(0,-100,0)
+          Hit(true)
+          repeat RS.Stepped:Wait()
+              for i,v in pairs(STAND.Character.Humanoid:GetPlayingAnimationTracks()) do
+                  if v.Animation.AnimationId == 'rbxassetid://2788289281' then
+                      a = true
+                  end
+              end
+          until a == true
+          wait(0.9)
+          STAND.Character.HumanoidRootPart.CFrame = OWNER.Character.HumanoidRootPart.CFrame*CFrame.new(-0.2,-1,2.05)
+          local BP = Instance.new("BodyPosition")
+          BP.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+          BP.P = 11250
+          BP.D = 300
+          BP.Parent = STAND.Character.HumanoidRootPart
+          BP.Position = STAND.Character.HumanoidRootPart.Position
+          BP.Position = OWNER.Character.HumanoidRootPart.CFrame*CFrame.new(1.25,2,3.25).Position
+          wait()
+          BP.Position = OWNER.Character.HumanoidRootPart.CFrame*CFrame.new(2,1.45,0).Position
+          wait()
+          BP.Position = OWNER.Character.HumanoidRootPart.CFrame*CFrame.new(0.25,0.75,-4).Position
+          wait(0.31)
+          STAND.Character.HumanoidRootPart:FindFirstChildWhichIsA("BodyPosition"):Destroy()
+          STAND.Character.HumanoidRootPart.CFrame = OWNER.Character.HumanoidRootPart.CFrame*CFrame.new(0,0,100)
+          RS.Stepped:Wait()
+          STAND.Character.HumanoidRootPart.CFrame = OWNER.Character.HumanoidRootPart.CFrame*CFrame.new(0,-100,0)
+          side = false
+      else 
+          a = false
+          STAND.Character.HumanoidRootPart.CFrame = OWNER.Character.HumanoidRootPart.CFrame*CFrame.new(0,-100,0)
+          Hit(true)
+          repeat RS.Stepped:Wait()
+              for i,v in pairs(STAND.Character.Humanoid:GetPlayingAnimationTracks()) do
+                  if v.Animation.AnimationId == 'rbxassetid://2788289281' then
+                      a = true
+                  end
+              end
+          until a == true ame.new(0.2,-1,2.05)
+          local BP = Instance.new("BodyPosition")
+          BP.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+          BP.P = 11250
+          BP.D = 300
+          BP.Parent = STAND.Character.HumanoidRootPart
+          BP.Position = STAND.Character.HumanoidRootPart.Position
+          BP.Position = OWNER.Character.HumanoidRootPart.CFrame*CFrame.new(-1.25,2,3.25).Position
+          wait()
+          BP.Position = OWNER.Character.HumanoidRootPart.CFrame*CFrame.new(-2,1.45,0).Position
+          wait()
+          BP.Position = OWNER.Character.HumanoidRootPart.CFrame*CFrame.new(-0.25,0.75,-4).Position
+          wait(0.31)
+          STAND.Character.HumanoidRootPart:FindFirstChildWhichIsA("BodyPosition"):Destroy()
+          STAND.Character.HumanoidRootPart.CFrame = OWNER.Character.HumanoidRootPart.CFrame*CFrame.new(0,0,100)
+          RS.Stepped:Wait()
+          STAND.Character.HumanoidRootPart.CFrame = OWNER.Character.HumanoidRootPart.CFrame*CFrame.new(0,-100,0)
+          side = true
+      end
+  end
+--//------------------------------------------------------------------------------------------\\--
+  local function Heavy1()
+      STAND.Character.HumanoidRootPart.CFrame = OWNER.Character.HumanoidRootPart.CFrame*CFrame.new(0,-100,0)
+      Hit(true)
+      wait(0.975)
+      STAND.Character.HumanoidRootPart.CFrame = OWNER.Character.HumanoidRootPart.CFrame*CFrame.new(-0.2,-1,2.05)
+      AnimPlay(3354696735,1.5)
+          for i,v in pairs(STAND.Character.Humanoid:GetPlayingAnimationTracks()) do
+              if v.Animation.AnimationId == 'rbxassetid://278829207' then
+                  v:Stop()
+              end
+          end
+      local BP = Instance.new("BodyPosition")
+      BP.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+      BP.P = 10000
+      BP.D = 300
+      BP.Parent = STAND.Character.HumanoidRootPart
+      BP.Position = STAND.Character.HumanoidRootPart.Position
+      BP.Position = OWNER.Character.HumanoidRootPart.CFrame*CFrame.new(1.25,2,3.25).Position
+      wait(0.04)
+      BP.Position = OWNER.Character.HumanoidRootPart.CFrame*CFrame.new(2,1.45,0).Position
+      wait(0.02)
+      BP.Position = OWNER.Character.HumanoidRootPart.CFrame*CFrame.new(0.25,0.75,-4).Position
+      wait(0.25)
+      STAND.Character.HumanoidRootPart:FindFirstChildWhichIsA("BodyPosition"):Destroy()
+      Summon()
+      AnimStop(3354696735,0.3)
+  end
+  --/---------------------------------------------------------------------------------------------\--
