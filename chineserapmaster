@@ -358,6 +358,22 @@ else
     end)     
 end
 --//------------------------------------------------------------------------------------------\\--
+coroutine.wrap(function()
+    while Settings['Made By JoJo#2494'].AUTOPICKUPCASH == true do
+        wait()
+        for _,v in pairs(game:GetService('Workspace'):FindFirstChild('Ignored'):FindFirstChild('Drop'):GetChildren()) do
+            if v:IsA('Part') then
+                if (v.Position - STAND.Character:FindFirstChild('HumanoidRootPart').Position).Magnitude <= 12 then
+                    wait(0.01);
+                    fireclickdetector(v:FindFirstChildOfClass('ClickDetector'));
+                end;
+            end;
+        end;
+    end;
+end)()
+end
+end
+--//------------------------------------------------------------------------------------------\\--
 STAND.Idled:connect(function()
     game:GetService("VirtualUser"):Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
     wait(1)
@@ -987,20 +1003,5 @@ Buy = {
         STAND.Backpack:FindFirstChild("Combat").Parent = STAND.Character
     end,
 }
---//------------------------------------------------------------------------------------------\\--
-coroutine.wrap(function()
-    while Settings['Made By JoJo#2494'].AUTOPICKUPCASH == true do
-        wait()
-        for _,v in pairs(game:GetService('Workspace'):FindFirstChild('Ignored'):FindFirstChild('Drop'):GetChildren()) do
-            if v:IsA('Part') then
-                if (v.Position - STAND.Character:FindFirstChild('HumanoidRootPart').Position).Magnitude <= 12 then
-                    wait(0.01);
-                    fireclickdetector(v:FindFirstChildOfClass('ClickDetector'));
-                end;
-            end;
-        end;
-    end;
-end)()
-end
-end
+
 --/---------------------------------------------------------------------------------------------\--/ vArcane
