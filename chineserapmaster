@@ -1,4 +1,4 @@
---// Private new \\--
+--// Stand Creator 1.1.0 \\--
 if not game['Loaded'] or not game:GetService("Players").LocalPlayer then 
     game['Loaded']:Wait();
     game:WaitForChild(game:GetService('Players'));
@@ -319,7 +319,7 @@ if Settings['Made By JoJo#2494'].FOLLOWANIM then
     OWNER.Character:WaitForChild("Humanoid"):GetPropertyChangedSignal("MoveDirection"):Connect(Moved)
 end
 --//------------------------------------------------------------------------------------------\\--
-Notify("Private Stand","Success!")
+Notify("JoJo's Stand Framework 1.0.9","Success!")
 end
 --//------------------------------------------------------------------------------------------\\----//------------------------------------------------------------------------------------------\\--
 if not STAND.Character:FindFirstChild("ForceField_TESTING") then
@@ -356,22 +356,6 @@ else
         noclip.CFrame = STAND.Character.HumanoidRootPart.CFrame + Vector3.new(0,x,0)
         end)
     end)     
-end
---//------------------------------------------------------------------------------------------\\--
-coroutine.wrap(function()
-    while Settings['Made By JoJo#2494'].AUTOPICKUPCASH == true do
-        wait()
-        for _,v in pairs(game:GetService('Workspace'):FindFirstChild('Ignored'):FindFirstChild('Drop'):GetChildren()) do
-            if v:IsA('Part') then
-                if (v.Position - STAND.Character:FindFirstChild('HumanoidRootPart').Position).Magnitude <= 12 then
-                    wait(0.01);
-                    fireclickdetector(v:FindFirstChildOfClass('ClickDetector'));
-                end;
-            end;
-        end;
-    end;
-end)()
-end
 end
 --//------------------------------------------------------------------------------------------\\--
 STAND.Idled:connect(function()
@@ -1003,4 +987,19 @@ Buy = {
         STAND.Backpack:FindFirstChild("Combat").Parent = STAND.Character
     end,
 }
---/---------------------------------------------------------------------------------------------\--/ vArcane
+--//------------------------------------------------------------------------------------------\\--
+coroutine.wrap(function()
+    while Settings['Made By JoJo#2494'].AUTOPICKUPCASH == true do
+        wait()
+        for _,v in pairs(game:GetService('Workspace'):FindFirstChild('Ignored'):FindFirstChild('Drop'):GetChildren()) do
+            if v:IsA('Part') then
+                if (v.Position - STAND.Character:FindFirstChild('HumanoidRootPart').Position).Magnitude <= 12 then
+                    wait(0.01);
+                    fireclickdetector(v:FindFirstChildOfClass('ClickDetector'));
+                end;
+            end;
+        end;
+    end;
+end)()
+end
+end
